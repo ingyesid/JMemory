@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.CECAR.jmemomry.logica;
+package edu.CECAR.jmemory.logica;
 
 import java.util.Random;
 import java.util.Vector;
+import javax.microedition.lcdui.Graphics;
 
 /**
  *
@@ -24,17 +25,17 @@ public class MemoryGame {
     public MemoryGame(Card[][] dificulty, String playerName) {
 
         if (dificulty.equals(EASY)) {
-            Vector gameCards = generateRamdonNumbers(6,12);
+            Vector gameCards = generateRamdonNumbers(6, 12);
             player = new Player(playerName);
             gameStatus = true;
             cards = EASY;
-            int index=0;
+            int index = 0;
             for (int i = 0; i < cards.length; i++) {
                 for (int j = 0; j < cards[i].length; j++) {
-                    cards[i][j]=(Card)gameCards.elementAt(index);
+                    cards[i][j] = (Card) gameCards.elementAt(index);
                     index++;
                 }
-                
+
             }
         } else if (dificulty.equals(MEDIUN)) {
         } else {
@@ -136,5 +137,26 @@ public class MemoryGame {
 
     public void setGameStatus(boolean gameStatus) {
         this.gameStatus = gameStatus;
+    }
+
+    public boolean isComplete() {
+        boolean result = false;
+        for (int i = 0; i < cards.length; i++) {
+
+            for (int j = 0; j < cards[0].length; j++) {
+
+
+                if (cards[i][j].isDiscovered()) {
+                    result = true;
+                    break;
+                }
+            }
+            if (result) {
+                break;
+            }
+
+        }
+
+        return result;
     }
 }

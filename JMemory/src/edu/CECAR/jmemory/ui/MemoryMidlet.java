@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmemory;
+package edu.CECAR.jmemory.ui;
 
-import edu.CECAR.jmemomry.logica.Card;
-import edu.CECAR.jmemomry.logica.MemoryGame;
+import edu.CECAR.jmemory.logica.Card;
+import edu.CECAR.jmemory.logica.MemoryGame;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Command;
@@ -20,11 +20,11 @@ import javax.microedition.midlet.*;
 /**
  * @author linkjf
  */
-public class Midlet extends MIDlet implements CommandListener{
+public class MemoryMidlet extends MIDlet implements CommandListener{
     private Display display;
     private TextBox txtPlayerName;
     private Command commandPlay;
-    public Midlet(){
+    public MemoryMidlet(){
     display=Display.getDisplay(this);
     txtPlayerName= new TextBox("Player Name", "", 100, TextField.ANY);
     commandPlay= new Command("Jugar",Command.OK, 0);
@@ -49,7 +49,7 @@ public class Midlet extends MIDlet implements CommandListener{
                 display.setCurrent(alert,txtPlayerName);
             } else {     
 
-                         display.setCurrent(new MemoryCanvas(new MemoryGame(MemoryGame.EASY, txtPlayerName.getString().trim())));
+                 display.setCurrent(new MemoryCanvas(new MemoryGame(MemoryGame.EASY, txtPlayerName.getString().trim()),MemoryMidlet.this));
             }
         }
     }
